@@ -1,0 +1,9 @@
+﻿body > :not(#frmHistorico), #tblCoolbar {
+	display: none!important;
+}
+
+@media print {
+	.Tabela {
+		border-collapse: unset! important;
+	}
+}

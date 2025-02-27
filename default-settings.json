@@ -1,0 +1,31 @@
+{
+	"version": "1.0",
+	"author": "Fabio Fernandes Bezerra",
+	"description": "Definições padrões para a extensão cfor-ext",
+
+    "hacks": {
+        "new_docs": [
+            {"menu": "Externo/Consulta de Regularidade", "type": "Consulta", "description": "de Regularidade", "upload": true, "access": "auto"},
+            {"menu": "Externo/Licenças Impressas", "type": "Licença", "description": "$info.indicativo", "upload": true, "access": 2},
+            {"menu": "Externo/COER", "type": "Certificado", "description": "de Operador de Estação de Radioamador", "upload": true, "access": 1},
+            {"menu": "Externo/Declaração de Aeronave", "type": "Declaração", "description": "de Estação de Aeronave $info.indicativo", "upload": true, "access": "auto"},
+            {"menu": "Externo/Relatório de ...", "type": "Relatório", "description": "de ", "upload": true, "access": 2},
+            {"menu": "Externo/Registro de Visão", "type": "Registro", "description": "de Chamado para Suporte de TI", "upload": true, "access": 1},
+            {"menu": "Externo/Extrato de Lançamentos", "type": "Extrato", "description": "de Lançamentos", "upload": true, "access": 2},
+            {"menu": "Externo/Publicação DOU", "type": "Publicação", "description": "DOU de $hoje", "upload": true, "access": 0},
+            {"menu": "-/Lista de Verificação", "type": "check list de analise", "template": "O-Checklist", "auto_confirm": true, "access": 0},
+            {"menu": "Análise Técnica", "type": "check list de analise", "template": "O-Análise_Técnica", "auto_confirm": true, "access": 0},
+            {"menu": "Boletos", "title": "Gerar Ofício de Notificação de Boletos", "type": "oficio", "template": "O-Boleto", "auto_confirm": true, "access": 2},
+            {"menu": "Licença", "title": "Gerar Ofício de Encaminhamento de Licenças", "type": "oficio", "template": "O-Licença", "auto_confirm": true, "access": 2, "reference": "$ref.tipo == LC", "favorite": "auto"},
+            {"menu": "Autocadastramento", "title": "Gerar Ofício de Deferimento de Autocadastramento", "type": "oficio", "template": "O-Def_Autocad", "auto_confirm": true, "access": "auto"},
+            {"menu": "Exigência", "title": "Gerar Ofício de Exigência", "type": "oficio", "template": "O-Exigência", "auto_confirm": true, "access": "auto", "reference": "$ref.tipo == CL || $ref.tipo == OF", "favorite": "auto"},
+            {"menu": "Informe", "title": "Gerar Informe Genérico", "type": "informe", "access": 0, "reference": true},
+            {"menu": "Ato", "title": "Gerar Ato Genérico", "type": "ato", "access": 0, "reference": true},
+            {"menu": "Extinção", "title": "Gerar Ofício de Notificação de Extinção", "type": "oficio", "template": "O-Notificação_extinção", "auto_confirm": true, "access": "auto", "reference": true, "favorite": true, "visibility": "$ref.tipo == AT"},
+            {"menu": "Certidão", "title": "Gerar Certidão Genérica", "type": "certidao", "template": "O- Certidão", "access": 0, "auto_confirm": true},
+            {"menu": "-/Deferimento", "title": "Ofício de Deferimento", "type": "oficio", "template": "O-Deferimento", "auto_confirm": true, "access": "auto", "reference": "$ref.tipo == OF"},
+            {"menu": "Indeferimento", "title": "Ofício de Indeferimento", "type": "oficio", "template": "O- Indeferimento", "auto_confirm": true, "access": "auto", "reference": "$ref.tipo == OF", "favorite": "auto"},
+            {"menu": "Arquivamento", "title": "Despacho de arquivamento", "type": "despacho ordinatorio", "template": "O-Despacho", "auto_confirm": true, "access": 0}
+        ]
+    }
+}

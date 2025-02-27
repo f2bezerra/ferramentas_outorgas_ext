@@ -1,0 +1,63 @@
+/************************************************/	
+/*	Documento CSS								*/
+/*	Autor: Fábio Fernandes Bezerra				*/
+/************************************************/
+@charset "utf-8";
+
+.vars-table {
+	border-radius: 2px;
+}
+
+.vars-table thead, .vars-table td:first-child, .vars-table th:first-child {
+	background-color: #eee!important;
+}
+
+.vars-table th {
+	font-size: 12px;
+	padding: 2px;
+	font-family: verdana;
+	font-weight: bold;	
+}
+
+.vars-table tbody{
+	height: 120px;
+}
+
+.vars-table tbody tr{
+	height: 20px;
+}
+
+.vars-table .edtable-selected {
+	background-color: #e9e9e9;
+}
+
+.cke_dialog_ui_separator{
+	height: 40px;
+	vertical-align: middle;
+}
+
+.cke_dialog_ui_separator label{
+	font-size: 12px;
+	padding: 0px;
+	font-weight: bold;
+	border-bottom: 1px solid #1c4f51;
+	border-bottom-style: dotted;
+	width: 100%;
+	display: inline-block !important;	
+}
+
+.cke_dialog_ui_label {
+	margin-right: 4px;
+}
+
+.cke_dialog_ui_field {
+	display: inline-block;
+}
+
+.cke_dialog_ui_field:last-child {
+	width: 100%;
+}
+
+.cke_dialog_ui_field:nth-child(n + 2) {
+	margin-left: 20px;
+}

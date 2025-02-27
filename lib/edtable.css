@@ -1,0 +1,137 @@
+/************************************************/	
+/*	Documento CSS								*/
+/*	Autor: Fábio Fernandes Bezerra				*/
+/************************************************/
+@charset "utf-8";
+
+.edtable {
+	border: 1px solid gray;
+	font-size: 1em;
+}
+
+.edtable th:nth-child(n+2), td:nth-child(n+2) {
+	border-left: 1px solid gray;
+}
+
+.edtable td {
+	border-bottom: 1px solid gray;
+	padding: 4px;
+}
+
+
+.edtable:focus {
+	outline: none;
+}
+
+.edtable-input:focus {
+	outline-offset: -1px;
+	/* outline: none; */
+}
+
+.edtable-check {
+    text-align: center;
+    vertical-align: middle; 	
+}
+
+.edtable-selected {
+	background-color: #e6e6e6;
+}
+
+.edtable-fixed-header{
+	display: block;
+}
+
+.edtable-fixed-header tbody{
+	display:block;
+	width: 100%;
+	overflow-y: auto;
+}
+
+.edtable-fixed-header tbody tr {
+	display: table;
+	width: 100%;
+}
+
+.edtable-fixed-header thead{
+	display:block;
+	width: 100%;
+}
+
+.edtable-fixed-header thead tr {
+	display: table;
+	width: 100%;
+}
+
+.edtable-fixed-header td, .edtable-fixed-header th {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.edtable-fixed-header td:last-child, 
+.edtable-fixed-header th:last-child, 
+.edtable-fixed-header thead>tr {
+	border-right: 0;
+}
+
+.edtable-fixed-header thead tr, 
+.edtable-fixed-header thead th {
+	border-bottom: 0!important;
+}
+
+.edtable-fixed-header thead {
+	border-bottom: 2px solid black;
+} 
+
+.edtable-fixed-header tbody tr:first-child, 
+.edtable-fixed-header tbody tr:first-child td {
+	border-top: 0;
+}
+
+
+
+
+.edtable-bar {
+    /* display: inline-block; */
+    width: 5px;
+    padding-left: 5px;	
+    overflow: hidden;
+    float: left;
+    background-color: orange;
+    margin: -8px 5px -16px -8px;
+    height: 39px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+	cursor: pointer;
+	transition: width 200ms;
+}
+
+.edtable-bar:hover {
+    width: 80px;
+    padding: 0 10px 0 10px;
+}
+
+.edtable-bar-btn {
+	font-size: inherit;
+}
+
+.edtable-line-number {
+	counter-reset: serial-number;  
+}
+  
+.edtable-line-number td:first-child:before {
+	counter-increment: serial-number;  
+	content: counter(serial-number);  
+}
+
+.edtable-line-number td:first-child, .edtable-line-number th:first-child {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9em;
+    min-width: 2em;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    background-color: #fefefe;
+}

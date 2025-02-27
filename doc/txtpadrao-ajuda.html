@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head >
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>CFOR - Variáveis e Controles Disponíveis da Extensão</title>
+	
+	<style>
+	* {
+		font-family: arial,verdana,helvetica,sans-serif;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: normal;
+		color: #000;
+	}
+	
+	h1 {
+		margin-top: 30px;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	strong {
+		font-weight: bold;
+	}
+	
+	em {
+		font-weight: bold;
+	}
+	
+	var {
+		font-style: italic;
+	}
+	
+	code {
+		font-family: monospace;
+		font-weight: bold;
+		font-style: normal;
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	table td:nth-child(1) {
+		text-align: center;
+	}
+	
+	table td:nth-child(2) {
+		font-family: monospace;
+		text-align: center;
+	}
+
+	td, th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+	
+	div.obsoleto::before{
+		content: "(obsoleto)";
+	}
+	
+	div.obsoleto {
+		color: red;
+		font-size: 11px;
+		margin-top: 4px;
+		cursor: pointer;
+	}
+	
+	code.sample {
+		font-weight: normal;
+		font-size: 12px;
+		background-color: #ddd;
+		border: 1px solid #888;
+		border-radius: 14px;
+		height: 14px;
+		padding: 4px;
+		display:inline-block;
+		cursor: pointer;
+		margin-bottom: 4px;
+	}
+	
+	.bool-1 {
+		color: #145a32;
+		font-family: monospace;
+		background-color: #e9f7ef;
+		cursor: pointer;
+	}
+	
+	.bool-0 {
+		color: #7b241c;
+		font-family: monospace;
+		background-color: #f9ebea;
+		cursor: pointer;
+	}
+	
+	.cfor-controls code {
+		font-family: monospace;
+		font-size: 12px!important;
+		background-color: beige;
+		color: saddlebrown;
+	}
+
+	tr:nth-child(even){background-color: #f2f2f2;}
+
+	tr:hover {background-color: #ddd;}
+
+	th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #555;
+		color: white;
+		font-weight: bold;
+	}
+	
+	.breadcrumb {
+		padding: 8px 15px;
+		margin-bottom: 20px;
+		list-style: none;
+		background-color: #f5f5f5;
+		border-radius: 4px;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #333;
+	}	
+	
+	.breadcrumb ul {
+		margin-top: 0;
+		margin-bottom: 10px;
+	}
+	
+	.breadcrumb > li {
+		display: inline-block;
+	}	
+	
+	.breadcrumb > li + li::before {
+		padding: 0 5px;
+		color: #ccc;
+		content: "/\00a0";
+	}	
+	
+	a {
+		color: #337ab7;
+		text-decoration: none;
+		background-color: transparent;
+	}
+	
+	a:focus, a:hover {
+		outline: 0;
+		color: #23527c;
+		text-decoration: underline;
+	}
+	
+	
+	h1 a {
+		font-size: 10px;
+		background-color: #eee;
+		border: 1px solid #337ab7;
+		border-radius: 14px;
+		padding: 2px;
+		display:inline-block;
+		cursor: pointer;
+	}
+	
+	h1 a:hover, h1 a:active {
+		text-decoration: none;
+	}	
+
+	.new::after {
+		margin-left: 4px;
+		content: "novidade";
+		font-size: 10px;
+		background-color: #9a34ee;
+		color: #fff;
+		border: 1px solid #9a34ee;
+		border-radius: 14px;
+		padding: 2px;
+		display: inline-block;
+		cursor: pointer;
+	}
+
+	.deprecation::after {
+		margin-left: 4px;
+		content: "será descontinuada";
+		font-size: 10px;
+		background-color: #ee5034;
+		color: #fff;
+		border: 1px solid #ee5034;
+		border-radius: 14px;
+		padding: 2px;
+		display: inline-block;
+		cursor: pointer;
+	}	
+
+	</style>	
+</head>
+<body>
+	<ul id="top" class="breadcrumb">
+		<li><a href="#hdCampos">Campos</a></li>
+		<li><a href="#hdVariaveis">Variáveis</a></li>
+		<li><a href="#hdFuncoes">Funções</a></li>
+		<li><a href="#hdControles">Controles</a></li>
+		<li><a href="#hdCondicoes">Expressões</a></li>
+	</ul>
+
+	<h1 id="hdCampos">Campos da Extensão <a href="#top">Topo</a></h1>
+	<p>Os campos da extensão CFOR dispõem de informações que os campos padrões do SEI não oferece e possuem a sintaxe a seguir:</p>
+	<p><code><strong>%</strong>nome_campo<var>[@formato]</var><strong>%</strong></code></p>
+	<p>Os campos são delimitados pelo sinal de porcentagem (%) e a alguns podem ser informados opção de formato que será definido após o símbolo de arroba (@). Abaixo, segue a lista de campos disponíveis:</p>
+	<table width="99%" ="Tabela de Campos Disponíveis">
+		<thead>
+			<tr>
+				<th width="10%">Campo</th>
+				<th width="10%">Sintaxe</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Descrição do Serviço</td>
+				<td>%desc_servico%</td>
+				<td>Descrição completa do serviço de acordo com a tipologia do processo no SEI. No caso de SARC, onde há apenas uma tipologia no SEI para todas as submodalidades, é necessário informar o código do serviço no campo "Especificação" do processo.
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>up</code>: Converte todas as letras da saída para MAIÚSCULAS<br>
+					<code>low</code>: Converte todas as letras da saída para minúsculas
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="Todas maiúsculas">%desc_servico@up%</code>
+					<code class="sample" title="Todas minúsculas">%desc_servico@low%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Indicador do Serviço</td>
+				<td>%ind_servico%</td>
+				<td>Indicador do serviço de acordo com a tipologia do processo no SEI. No caso de SARC, onde há apenas uma tipologia no SEI para todas as submodalidades, é necessário informar o código do serviço no campo "Especificação" do processo.
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>up</code>: Converte todas as letras da saída para MAIÚSCULAS<br>
+					<code>low</code>: Converte todas as letras da saída para minúsculas
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="Todas maiúsculas">%ind_servico@up%</code>
+					<code class="sample" title="Todas minúsculas">%ind_servico@low%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Sigla do Serviço</td>
+				<td>%sigla_servico%</td>
+				<td>Sigla do serviço de acordo com a tipologia do processo no SEI. No caso de SARC, onde há apenas uma tipologia no SEI para todas as submodalidades, é necessário informar o código do serviço no campo "Especificação" do processo.
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>up</code>: Converte todas as letras da saída para MAIÚSCULAS<br>
+					<code>low</code>: Converte todas as letras da saída para minúsculas
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="Todas maiúsculas">%sigla_servico@up%</code>
+					<code class="sample" title="Todas minúsculas">%sigla_servico@low%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Código do serviço</td>
+				<td>%cod_servico%</td>
+				<td>Código numérico de 3 dígitos do serviço de acordo com a tipologia do processo no SEI. No caso de SARC, onde há apenas uma tipologia no SEI para todas as submodalidades, é necessário informar o código do serviço no campo "Especificação" do processo.</td>
+			</tr>
+			<tr>
+				<td>CPF/CNPJ do Interessado</td>
+				<td>%cpfj_int%</td>
+				<td>Código numérico do CPF ou CNPJ do interessado.
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>*</code>: Substitui os 3 primeiros e os 2 últimos dígitos do CPF por asterisco (*)<br>
+					<code>num</code>: Exibe apenas os números do CPF ou CNPJ do interessado
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="CPF com 3 primeiros e 2 últimos protegidos">%cpfj_int@*%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação">%cpfj_int@num%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação e com proteção">%cpfj_int@num*%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Descrição do CPF/CNPJ do Interessado</td>
+				<td>%desc_cpfj_int%</td>
+				<td>Descrição do código numérico do CPF ou CNPJ do interessado. Automaticamente é inserido antes do código numérico o texto "CPF nº" ou "CNPJ nº"
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>*</code>: Substitui os 3 primeiros e os 2 últimos dígitos do CPF por asterisco (*)<br>
+					<code>num</code>: Exibe apenas os números do CPF ou CNPJ do interessado<br>
+					<code>low</code>: Converte todas as letras da saída para minúsculas
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="CPF com 3 primeiros e 2 últimos protegidos">%desc_cpfj_int@*%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação">%desc_cpfj_int@num%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação e com proteção">%desc_cpfj_int@num*%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação, todas minúsculas e com proteção">%desc_cpfj_int@lownum*%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>CPF/CNPJ do Destinatário</td>
+				<td>%cpfj_dest%</td>
+				<td>Código numérico do CPF ou CNPJ do destinatário.
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>*</code>: Substitui os 3 primeiros e os 2 últimos dígitos do CPF por asterisco (*)<br>
+					<code>num</code>: Exibe apenas os números do CPF ou CNPJ do destinatário
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="CPF com 3 primeiros e 2 últimos protegidos">%cpfj_dest@*%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação">%cpfj_dest@num%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação e com proteção">%cpfj_dest@num*%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Descrição do CPF/CNPJ do Destinatário</td>
+				<td>%desc_cpfj_dest%</td>
+				<td>Descrição do código numérico do CPF ou CNPJ do destinatário. Automaticamente é inserido antes do código numérico o texto "CPF nº" ou "CNPJ nº"
+				<p>
+					<ins>Apresenta duas opções de formato:</ins><br>
+					<code>*</code>: Substitui os 3 primeiros e os 2 últimos dígitos do CPF por asterisco (*)<br>
+					<code>num</code>: Exibe apenas os números do CPF ou CNPJ do destinatário<br>
+					<code>low</code>: Converte todas as letras da saída para minúsculas
+				</p>
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title="CPF com 3 primeiros e 2 últimos protegidos">%desc_cpfj_dest@*%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação">%desc_cpfj_dest@num%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação e com proteção">%desc_cpfj_dest@num*%</code>
+					<code class="sample" title="Apenas números sem caracteres de formatação, todas minúsculas e com proteção">%desc_cpfj_dest@lownum*%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Interessado Pessoa Física</td>
+				<td>%is_int_pf%</td>
+				<td>Retorna <span class="bool-1" title="1">verdadeiro</span> se o interessado for pessoa <em>física</em>, caso contrário, retorna <span class="bool-0" title="0">falso</span>.</td>
+			</tr>
+			<tr>
+				<td>Interessado Pessoa Jurídica</td>
+				<td>%is_int_pj%</td>
+				<td>Retorna <span class="bool-1" title="1">verdadeiro</span> se o interessado for pessoa <em>jurídica</em>, caso contrário, retorna <span class="bool-0" title="0">falso</span>.</td>
+			</tr>
+			<tr>
+				<td>Destinatário Pessoa Física</td>
+				<td>%is_dest_pf%</td>
+				<td>Retorna <span class="bool-1" title="1">verdadeiro</span> se o destinatário for pessoa <em>física</em>, caso contrário, retorna <span class="bool-0" title="0">falso</span>.</td>
+			</tr>
+			<tr>
+				<td>Destinatário Pessoa Jurídica</td>
+				<td>%is_dest_pj%</td>
+				<td>Retorna <span class="bool-1" title="1">verdadeiro</span> se o destinatário for pessoa <em>jurídica</em>, caso contrário, retorna <span class="bool-0" title="0">falso</span>.</td>
+			</tr>
+			<tr>
+				<td>Processo de SARC</td>
+				<td>%is_sarc%</td>
+				<td>Retorna <span class="bool-1" title="1">verdadeiro</span> se o processo é de SARC, caso contrário, retorna <span class="bool-0" title="0">falso</span>.</td>
+			</tr>
+			<tr>
+				<td>Usuário Externo SEI</td>
+				<td>%usu_sei_ok%</td>
+				<td>Retorna <span class="bool-1" title="1">verdadeiro</span> se foi definido Usuário Externo SEI válido, caso contrário, retorna <span class="bool-0" title="0">falso</span>.</td>
+			</tr>
+			<tr>
+				<td>Sequenciador</td>
+				<td>%seq_<var>n</var>%</td>
+				<td>Retorna o valor de um sequencial identificado por <var>n</var>, iniciado em 1(um), e o incrementa para a próxima chamada.
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title='Retorna o valor do sequencial "A" e o incrementa'>%seq_A%</code>
+					<code class="sample" title='Retorna o novo valor do sequencial "A" e o incrementa novamente'>%seq_A%</code>
+					<code class="sample" title='Retorna o valor do sequencial "teste" e o incrementa'>%seq_teste%</code>
+				</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br><br>
+
+	<h1 id="hdVariaveis">Variáveis de Usuário <a href="#top">Topo</a></h1>
+	<p>As variáveis de usuário são definidas através da tabela de entradas ou da função <code><a href="#fnVar">var</a></code>.</p> 
+	<p>O entrada do valor das variáveis ocorre durante o processamento do texto padrão na criação de novos documentos. Existem 5 tipos de variáveis:</p>
+	<ul>
+		<li><strong>text</strong>: Tipo Texto
+			<p>Variável de livre preenchimento textual.</p>
+		</li>
+
+		<li><strong>check</strong>: Tipo Lógico
+			<p>Variável que tem duas opções de valores possíveis: verdadeiro ou falso. Na aquisição do valor é apresentado um campo do tipo "checkbox".<br>
+			   Se o texto padrão possuir apenas um campo do tipo "check", será apresentada uma janela de confirmação durante a aquisição das variáveis de usuário.</p>
+		</li>
+
+		<li><strong>calendar</strong>: Tipo Data
+			<p>Variável que aceita valores em formato de data. Durante a aquisição das variáveis, a variável é representada por um campo específico de preenchimento de data.</p>
+		</li>
+
+		<li><strong>choice</strong>: Tipo Seleção
+			<p>Variável aceita valores definidos numa lista de valores possíveis. As opções de valores possíveis são definidas por uma string e separados por vírgula(,). <br>
+			   É possível definir valor diferente do texto apresentado, bastando para tanto informar o valor seguido do sinal de igual (=) e seguido pelo texto a ser apresentado (Exemplo: A=Ativo).</p>
+			<p>Durante a quisição das variáveis, ela é representada por um campo do tipo "caixa de seleção".</p>
+		</li>
+		<li><strong class="new">ref</strong>: Tipo Referência
+			<p>Variável que permite referenciar outros documentos do SEI.</p>
+			<p>Variáveis desse tipo permite acessar algumas informações (propriedades) do documento referenciado, que são:
+				<ul>
+					<li>nome: nome do documento;</li>
+					<li>texto: nome completo do documento;</li>
+					<li>num: número sequencial do documento;</li>
+					<li>sei: número SEI do documento;</li>
+					<li>data: data de criação do documento;</li>
+					<li>ano: ano de criação do documento;</li>
+					<li>link: link para o documento.</li>
+				</ul>
+			</p>
+			<p>Esse tipo não pode ser definido através da função <var><a href="#fnVar">var</a></var>.</p>
+		</li>
+	</ul>
+	
+	<p>As variáveis de Usuário são inseridas no texto padrão de acordo com a seguinte a sintaxe:</p>
+	<p><code>$<var>nome_variável</var>[.<var>propriedade</var>][@<var>formato</var>][??<var>valor_padrão</var>]</code></p>
+	<p>onde:
+		<ul>
+			<li>nome_variável: Nome da variável;</li>
+			<li>propriedade: Propriedades das variáveis tipo Referência;</li>
+			<li>formato: Formato de exibição do conteúdo do campo, onde:
+				<ul>
+					<li>up: Converte todas as letras para MAIÚSCULAS</li>
+					<li>low: Converte todas as letras da para minúsculas</li>
+					<li>num: Filtra todos os caracteres não-numéricos</li>
+					<li>ano: Exibe apenas o ano da data</li>
+					<li>ext: Exibe a data por extenso</li>
+					<li>i,n: Exibe "n" caracteres a partir da posição "i"</li>
+				</ul>
+			</li>
+			<li>valor_padrão: Valor a ser exibido caso nenhum valor para variável tenha sido informado</li>
+		</ul>
+	</p>
+	<p>Mesmo que nenhuma variável de usuário seja definida, informações do documento SEI passado como referência poderão ser acessadas através da variável <var>$ref</var> seguida da indicação da respectiva <var>propriedade</var>. O mesmo resultado poderá ser alcançado utilizando a função <a href="#fnRef">ref</a>.</p>
+	<br><br>
+
+	<h1 id="hdFuncoes">Funções da Extensão <a href="#top">Topo</a></h1>
+	<p>As funções da extensão CFOR dispõem de funcionalidades o SEI não oferece e possuem a sintaxe a seguir:</p>
+	<p><code><strong>%</strong>nome_função(<var>argumento1[; argumento2; ...; argumenton]</var>)<strong>%</strong></code></p>
+	<p>As funções são delimitadas pelo sinal de porcentagem (%) e após o nome seguem os argumentos, separados por ponto-vírgula (;) delimitados por parênteses. Abaixo, segue a lista de funções disponíveis:</p>
+	<table width="99%">
+		<thead>
+			<tr>
+				<th width="10%">Função</th>
+				<th width="10%">Sintaxe</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Teste da "Especificação do Processo"</td>
+				<td>%ep_has(<var>padrão</var>)%</td>
+				<td>Se a especificação do processo corresponde ao padrão informado retorna <span class="bool-1" title="1">verdadeiro</span>, senão retorna <span class="bool-0" title="0">falso</span>. O padrão pode utilizar os caracteres coringas *(todos) e ?(qualquer caracter). Ainda, se o padrão estiver entre aspas-duplas ("), significa que será considerado inteiramente o padrão tal qual como foi informado, desconsiderando correspondências parciais.
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title='Testa se na especificação do processo existe a palavra TESTE'>%ep_has("TESTE")%</code>
+					<code class="sample" title='Testa se na especificação do processo existe qualquer expressão iniciada com TESTE'>%ep_has(TESTE*)%</code>
+					<code class="sample" title='Testa se na especificação do processo existe qualquer expressão com TE + uma letra qualquer + TE'>%ep_has(TE?TE)%</code>
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td class="deprecation">Valor de campo</td>
+				<td>%field(<var>nome_campo</var>[;<var>padrão</var>])%</td>
+				<td>Procura campo de processo indicado em <var>nome_campo</var> e retorna seu valor. Caso não o campo não seja encontrado, o valor padrão é retornado.
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title='Retorna o valor do campo "Fistel"'>%field(fistel)%</code>
+					<code class="sample" title='Retorna o valor do campo "Fistel". Se não encontrado retorna ######'>%field(fistel;######)%</code>
+				</p>
+				</td>
+			</tr>
+			<tr id="fnVar">
+				<td class="deprecation">Variável de documento</td>
+				<td>%var(<var>nome</var>[;<var>tipo</var>;<var>rótulo</var>][;<var>padrão</var>])%</td>
+				<td>Retorna o valor de uma variável informada pelo usuário.
+				<p>
+					<ins>Tipos:</ins><br><br>
+					<code>text</code>: Tipo textual<br>
+					<code>check</code>: Tipo Lógico<br>
+					<code>calendar</code>: Tipo Data<br>
+					<code>choice</code>: Tipo Escolha. As opções são inseridas logo após o tipo, precedidas por dois-pontos(:) e separadas por vírgula(,)
+				</p>
+				
+				<p><ins>Exemplos:</ins>
+					<code class="sample" title='Exibe uma janela para informar um valor, tipo texto, que será atribuído à variável "fistel". Valor padrão 12345678900'>%var(fistel;text;Informe número de Fistel;12345678900)%</code>
+					<code class="sample" title='Retorna o valor da variável "fistel". Valor padrão 12345678900'>%var(fistel;12345678900)%</code>
+					<code class="sample" title='Retornar o valor da variável "fistel". Sem valor padrão'>%var(fistel)%</code>
+					<code class="sample" title='Exibe uma janela para informar um valor, tipo lógico, que será atribuído à variável "debito". Valor padrão false'>%var(debito;check;Tem débito;false)%</code>
+					<code class="sample" title='Exibe na janela de variáveis do documento uma caixa de seleção'>%var(status;choice:Ativo,Inativo;Qual situação da entidade;Inativo)%</code>
+					<code class="sample" title='Exibe na janela de variáveis do documento uma caixa de seleção, porém com valores para cada opção'>%var(status;choice:A=Ativo,I=Inativo;Qual situação da entidade;A)%</code>
+				</p>
+				</td>
+			</tr>
+			<tr id="fnRef">
+				<td class="deprecation">Dados de documento de referência</td>
+				<td>%ref(<var>nome</var>[@<var>formato</var>][;<var>padrão</var>])%</td>
+				<td>Retorna informações do documento passado de referência. O documento selecionado antes de escolher a opção de "criação de novo documento" é passado como referência para este.
+					<p>
+						<ins>Informação:</ins><br><br>
+						<ul>
+							<li>nome: nome do documento de referência;</li>
+							<li>texto: nome completo do documento de referência;</li>
+							<li>num: número sequencial do documento de referência;</li>
+							<li>sei: número SEI do documento de referência;</li>
+							<li>data: data de criação do documento de referência;</li>
+							<li>ano: ano de criação do documento de referência;</li>
+							<li>link: link para o documento de referência.</li>
+						</ul>
+					</p>
+					
+					<p><ins>Exemplos:</ins>
+						<code class="sample" title='Insere quando possível o número SEI do documento passado como referência. Valor padrão 12345678900'>%ref(sei;12345)%</code>
+						<code class="sample" title='Insere quando possível o link para o  documento passado como referência.'>%ref(link)%</code>
+					</p>
+				</td>
+			</tr>
+			
+			<!-- <tr>
+				<td>Dados de marcadores do documento de referência</td>
+				<td>%bm(<var>nome</var>)%</td>
+				<td>Retorna o valor de um maracador passado pelo documento de referência.
+				
+					<p><ins>Exemplos:</ins>
+						<code class="sample" title='Insere o valor do marcador "abc" do documento passado como referência.'>%bm(abc)%</code>
+					</p>
+				</td>
+			</tr> -->
+			
+ 		</tbody>
+	</table>
+	
+	
+	<h1 id="hdControles">Controles da Extensão <a href="#top">Topo</a></h1>
+	<p>Os controles permitem que seja impresso determinado conteúdo de acorco com as condições informadas:</p>
+	<table width="99%" class="cfor-controls">
+		<thead>
+			<tr>
+				<th width="50%">Controle</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>{#if expressão}</code> <var>conteúdo_se_verdade</var> <code>{#endif}</code></td>
+				<td>Se resultado da <var>expressão</var> for <span class="bool-1" title="1">verdadeiro</span>, escreve <var>conteúdo_se_verdade</var>, senão não escreve nada.
+			</tr>
+			<tr>
+				<td><code>{#if expressão}</code> <var>conteúdo_se_verdade</var> <code>{#else}</code> <var>conteúdo_se_falso</var> <code>{#endif}</code></td>
+				<td>Se resultado da <var>expressão</var> for <span class="bool-1" title="1">verdadeiro</span>, escreve <var>conteúdo_se_verdade</var>, senão escreve <var>conteúdo_se_falso</var></td>
+			</tr>
+			<tr>
+				<td><code>{#if expressão_1}</code> <var>conteúdo_1</var> <code>{#if expressão_2}</code> <var>conteúdo_2</var> <code>{#else}</code> <var>conteúdo_3</var> <code>{#endif}</code></td>
+				<td>Se resultado da <var>expressão_1</var> for <span class="bool-1" title="1">verdadeiro</span>, escreve <var>conteúdo_1</var>, senão se resultado da <var>expressão_2</var> for <span class="bool-1" title="1">verdadeiro</span>, escreve <var>conteúdo_2</var>, senão escreve <var>conteúdo_3</var></td>
+			</tr>
+			<tr>
+				<td><code>{#? </code> <var>expressão</var> <code>?</code> <var>texto_se_verdade</var> <code>:</code> <var>texto_se_falso</var> <code>}</code></td>
+				<td>Operação Ternária: Se o resultado da <var>expressão</var> for <span class="bool-1" title="1">verdadeiro</span>, escreev <var>texto_se_verdadeiro</var>, senão escreve <var>texto_se_falso</var></td>
+			</tr>
+		</tbody>
+	</table>
+	<br><br>
+
+	
+	<h1 id="hdCondicoes">Operações de teste <a href="#top">Topo</a></h1>
+	<table width="99%">
+		<thead>
+			<tr>
+				<th width="10%">Operação</th>
+				<th width="20%">Sintaxe</th>
+				<th>Descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Igual</td>
+				<td><var>A</var><code> == </code><var>B</var></td>
+				<td>Se <var>A</var> e <var>B</var> forem <em>iguais</em>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Diferente</td>
+				<td><var>A</var><code> != </code><var>B</var></td>
+				<td>Se <var>A</var> e <var>B</var> forem <em>diferentes</em>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Maior</td>
+				<td><var>A</var><code> > </code> </code><var>B</var></td>
+				<td>Se <var>A</var> for <em>maior</em> que <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Maior ou Igual</td>
+				<td><var>A</var><code> >= </code> </code><var>B</var></td>
+				<td>Se <var>A</var> for <em>maior ou igual</em> que <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Menor</td>
+				<td><var>A</var><code> < </code> </code><var>B</var></td>
+				<td>Se <var>A</var> for <em>menor</em> que <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Menor ou Igual</td>
+				<td><var>A</var><code> <= </code> </code><var>B</var></td>
+				<td>Se <var>A</var> for <em>menor ou igual</em> que <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Começa com</td>
+				<td><var>A</var><code> ^= </code> </code><var>B</var></td>
+				<td>Se <var>A</var> <em>começar</em> com <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Contém</td>
+				<td><var>A</var><code> *= </code> </code><var>B</var></td>
+				<td>Se <var>A</var> <em>contém</em> <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Termina com</td>
+				<td><var>A</var><code> $= </code> </code><var>B</var></td>
+				<td>Se <var>A</var> <em>terminar</em> com <var>B</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>Em</td>
+				<td><var>A</var><code> IN </code><var>[B,C,D,E,F]</var></td>
+				<td>Se <var>A</var> for <em>igual</em> a um dos valores <var>B,C,D,E</var> ou <var>F</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>E Lógico</td>
+				<td><var>A</var><code> == </code><var>B</var><code> && </code><var>C</var><code> == </code><var>D</var></td>
+				<td>Se <var>A</var> igual a <var>B</var> <em>e</em> <var>C</var> igual a <var>D</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>OU Lógico</td>
+				<td><var>A</var><code> == </code><var>B</var><code> || </code><var>C</var><code> == </code><var>D</var></td>
+				<td>Se <var>A</var> igual a <var>B</var> <em>ou</em> <var>C</var> igual a <var>D</var>, então o resultado da expressão será <span class="bool-1" title="1">verdadeiro</span>, senão será <span class="bool-0" title="0">falso</span></td>
+			</tr>
+			<tr>
+				<td>NÃO Lógico</td>
+				<td><code>!</code><var>expressão</var></td>
+				<td>Se o resultado da <var>expressão</var> for <span class="bool-1" title="1">verdadeiro</span>, então o inverso será <span class="bool-0" title="0">falso</span>. Por outro lado, se for <span class="bool-0" title="0">falso</span>, então o inverso será <span class="bool-1" title="1">verdadeiro</span>.</td>
+			</tr>
+			<tr>
+				<td>Ordenação</td>
+				<td><code>!</code>((<var>expressão_1</var><code> && </code><var>expressão_2</var>)<code> || </code><var>expressão3</var>)</td>
+				<td>O uso de parênteses é permitido para alterar a ordem de avaliação das partes da expressão.</td>
+			</tr>
+			<tr>
+				<td>Atribuição</td>
+				<td><var>$variavel</var><code> = </code><var>expressão</var></td>
+				<td>Atribui o valor da <var>expressão</var> para <var>$variavel</var>.</td>
+			</tr>
+		</tbody>
+	</table>	
+	
+</body>
+</html>

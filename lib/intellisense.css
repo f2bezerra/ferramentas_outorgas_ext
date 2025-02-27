@@ -1,0 +1,104 @@
+/************************************************/	
+/*	Documento CSS								*/
+/*	Autor: Fábio Fernandes Bezerra				*/
+/************************************************/
+@charset "utf-8";
+
+
+.intellisense-icon-template p::before {
+	content: "\00a0";
+	margin-right: 4px;
+	display: inline-block;
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDggOCI+DQo8cGF0aCBmaWxsPSIjMDA2NDAwIiBkPSJtMy40NyAwYy0wLjk5IDEuMTEtMS45OCAyLjIxLTIuOTcgMy4zMnYxLjM2YzAuOTkgMS4xMSAxLjk4IDIuMjEgMi45NyAzLjMydi0xLjcyYy0wLjY5LTAuNzYtMS4zOC0xLjUyLTIuMDgtMi4yN2wyLjA4LTIuMjl2LTEuNzJ6bTEuMDUgMHYxLjcyYzAuNyAwLjc2IDEuMzkgMS41MiAyLjA5IDIuMjgtMC43IDAuNzYtMS4zOSAxLjUyLTIuMDggMi4yOHYxLjcyYzAuOTktMS4xMSAxLjk4LTIuMjEgMi45Ny0zLjMydi0xLjM2Yy0wLjk5LTEuMTEtMS45OC0yLjIxLTIuOTctMy4zMnptLTAuNTIgM2MtMC43MS0wLjA0LTEuMjQgMC44My0wLjkgMS40NSAwLjI5IDAuNjQgMS4zIDAuNzQgMS43IDAuMTUgMC40My0wLjUzIDAuMTEtMS40NS0wLjU3LTEuNTctMC4wOC0wLjAyLTAuMTUtMC4wMy0wLjIzLTAuMDN6Ii8+DQo8L3N2Zz4NCg==);
+	background-size: 12px 12px;
+	background-position: 0px 2px;
+	background-repeat: no-repeat;
+	width: 12px;
+}
+
+.intellisense-li-selected a {
+	background-color: #999!important;
+}
+
+.intellisense-popup-list {
+	width: 150px;
+	height: auto;
+	max-height: 170px;	
+	visibility: visible;
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #b6b6b6;
+	border-bottom-color: #999;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: 0 0 3px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 0 3px rgba(0,0,0,.15);
+	box-shadow: 0 0 3px rgba(0,0,0,.15);
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	vertical-align: baseline;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	border-collapse: collapse;
+	font: normal normal normal 12px Arial,Helvetica,Tahoma,Verdana,Sans-Serif;
+	color: #000;
+	text-align: left;
+	white-space: nowrap;
+	cursor: auto;
+}
+
+.intellisense-popup-list * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    vertical-align: baseline;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    border-collapse: collapse;
+    font: normal normal normal 12px Arial,Helvetica,Tahoma,Verdana,Sans-Serif;
+    color: #000;
+    text-align: left;
+    white-space: nowrap;
+    cursor: auto;
+}
+
+.intellisense-popup-panel {
+	overflow-y: auto;
+	overflow-x: hidden;	
+}
+
+.intellisense-popup-block ul {
+    list-style-type: none;
+    margin: 3px;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.intellisense-popup-block a {
+    padding: 3px 4px;
+    display: block;
+    border: 1px solid #fff;
+    color: inherit !important;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.intellisense-popup-block a:hover, .intellisense-popup-block a:focus, .intellisense-popup-block a:active {
+    border-color: #dedede;
+    background-color: #f2f2f2;
+    -moz-box-shadow: 0 0 2px rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.1) inset;
+    box-shadow: 0 0 2px rgba(0,0,0,.1) inset;
+}
