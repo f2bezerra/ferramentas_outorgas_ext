@@ -4,8 +4,6 @@
 /* Por Fábio Fernandes Bezerra                     */
 /***************************************************/
 
-$('#lnkInfraMenuSistema').attr('href', 'javascript:void();');
-
 document.getElementById("ifrConteudoVisualizacao").addEventListener("load", function () {
 	var docV = this.contentDocument || this.contentWindow.document;
 	var predata = sessionStorage.predata;
@@ -80,7 +78,7 @@ document.getElementById("ifrConteudoVisualizacao").addEventListener("load", func
 		$selTipo.val(predata.tipo);
 		$(docV).find('#hdnIdSerie').val(predata.tipo);
 
-		if (!predata.desc) predata.desc = "from_clipboard";
+		if (predata.desc === true) predata.desc = "from_clipboard";
 	}
 
 	//Inserir descritivo do documento
@@ -238,7 +236,7 @@ document.getElementById("ifrConteudoVisualizacao").addEventListener("load", func
 	let fn_autoconf = function () {
 		if (predata.autoconfirm && ($btnSalvar = $(docV).find("#btnSalvar"))) {
 			$btnSalvar.trigger("click");
-			document.getElementById("ifrVisualizacao").style.visibility = "visible";
+			document.getElementById("ifrConteudoVisualizacao").style.visibility = "visible";
 		}
 	};
 
@@ -301,7 +299,7 @@ document.getElementById("ifrConteudoVisualizacao").addEventListener("load", func
 	}
 
 	//Abrir janela de upload de arquivos automaticamente
-	if (predata.upload && ($upfile = $(docV).find('#filArquivo')) && $upfile.is(':visible')) $upfile.trigger('click');
+	if (predata.upload && ($upfile = $(docV).find('#filArquivo')) && $(docV).find('#lblArquivo:visible').length) $upfile.trigger('click');
 
 	if (predata.autoconfirm || predata.upload) return;
 

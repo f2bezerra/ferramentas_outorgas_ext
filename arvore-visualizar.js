@@ -32,7 +32,7 @@
 			}
 		}
 
-	}, 20);
+	}, 250);
 })(100);
 
 
@@ -95,67 +95,54 @@ function addNovo() {
 		root.push(menu);
 	}
 
-	createPopupMenu(btn, items, { dropButton: "menu-drop-button", useTip: true, tipText: "Gerar $0", dropButtonTitle: "Criação rápida de documentos" }, function (e) {
+	createPopupMenu(btn, items, { dropButton: "menu-drop-button", useTip: true, tipText: "Gerar $0", dropButtonTitle: "Criação rápida de documentos" }, async function (e) {
+
+		let preData = {};
+		let idSerie = 0;
+
+		if (e.id == "clone") {
+			if (!reference) return;
+
+			let source = await getAjaxContent(url_clonado);
+			if (!source) return;
+
+			let $source = $(source);
+
+			idSerie = $source.find('#hdnIdSerie').val();
+
+			let interessados = [];
+			$source.find('#selInteressados option').each(function () { interessados.push({ text: $(this).text(), value: $(this).val() }) });
+
+			let destinatarios = [];
+			$source.find('#selDestinatarios option').each(function () { destinatarios.push({ text: $(this).text(), value: $(this).val() }) });
+
+			let acesso = $source.find('#hdnStaNivelAcessoLocal').val();
+			let hipotese = $source.find('#hdnIdHipoteseLegal').val();
+
+			preData.sei = reference.sei;
+			preData.acesso = acesso;
+			preData.hipotese = hipotese
+			preData.autoconfirm = false;
+			if (interessados.length) preData.interessados = interessados;
+			if (destinatarios.length) preData.destinatarios = destinatarios;
+
+		} else {
+			idSerie = e.data.serie;
+			preData.tipo = e.data.type;
+			if (e.data.description) preData.desc = e.data.description.replace(/\$([\w\.]+)/ig, (m0, name) => variables.getValue(name) ?? "");
+			preData.acesso = e.data.access;
+			preData.upload = e.data.upload;
+			preData.autoconfirm = e.data.auto_confirm;
+			if (e.data.reference && solve(e.data.reference, null, variables)) preData.reference = reference;
+		}
 
 		let url_tipo = absoluteUrl($('#divArvoreAcoes a[href*="acao=documento_escolher_tipo"]').attr("href"));
+		let frame = queryFrame("visualizador");
+		if (preData.autoconfirm) frame.style.visibility = "hidden";
+		sessionStorage.predata = JSON.stringify(preData);
 
-		$.get(url_tipo, function (data) {
-			let url, predata = {}, $html = $(data);
+		submitFormOnFrame(frame, "frmDocumentoEscolherTipo", { hdnIdSerie: idSerie }, url_tipo);
 
-			if (e.id == "clone") {
-				if (!reference) return;
-
-				$.get(absoluteUrl(url_clonado), (data_clonado) => {
-					$html_clonado = $(data_clonado);
-
-					let tipo = filterAccents($html_clonado.find('#lblSerieTitulo').text());
-					if (!tipo) return;
-
-					let interessados = [];
-					$html_clonado.find('#selInteressados option').each(function () { interessados.push({ text: $(this).text(), value: $(this).val() }) });
-
-					let destinatarios = [];
-					$html_clonado.find('#selDestinatarios option').each(function () { destinatarios.push({ text: $(this).text(), value: $(this).val() }) });
-
-					let acesso = $html_clonado.find('#hdnStaNivelAcessoLocal').val();
-					let hipotese = $html_clonado.find('#hdnIdHipoteseLegal').val();
-
-					if ((url = $html.find(`[data-desc='${tipo.toLowerCase()}'] .ancoraOpcao`).attr('href')) && (ifr = window.top.document.getElementById("ifrConteudoVisualizacao"))) {
-						let predata = { sei: reference.sei, acesso: acesso, hipotese: hipotese, autoconfirm: true };
-						if (interessados.length) predata.interessados = interessados;
-						if (destinatarios.length) predata.destinatarios = destinatarios;
-						sessionStorage.predata = JSON.stringify(predata);
-						ifr.style.visibility = "hidden";
-						ifr.src = url;
-					}
-				});
-				return;
-			}
-
-			if (e.data.upload) {
-				url = $html.find("[data-desc*=externo] .ancoraOpcao").attr("href");
-				predata.tipo = e.data.type;
-				if (e.data.description) predata.desc = e.data.description.replace(/\$(\w+)/ig, (m0, name) => variables.getValue(name));
-				predata.acesso = e.data.access;
-				predata.upload = true;
-			} else {
-				url = $html.find(`[data-desc='${e.data.type}'] .ancoraOpcao`).attr("href");
-				if (e.data.template) predata.txtpad = e.data.template;
-				predata.acesso = e.data.access;
-				predata.autoconfirm = e.data.auto_confirm;
-				if (e.data.reference && solve(e.data.reference, null, variables)) predata.reference = reference;
-			}
-
-			if (url && (ifr = window.top.document.getElementById("ifrConteudoVisualizacao"))) {
-				if (e.originalEvent.ctrlKey) {
-					browser.runtime.sendMessage({ action: "duplicate", url: url, predata: predata });
-				} else {
-					sessionStorage.predata = JSON.stringify(predata);
-					if (predata.autoconfirm) ifr.style.visibility = "hidden";
-					ifr.src = url;
-				}
-			}
-		});
 	});
 }
 
