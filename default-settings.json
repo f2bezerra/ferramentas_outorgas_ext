@@ -173,7 +173,7 @@
             {
                 "menu": "Arquivamento",
                 "title": "Despacho de arquivamento",
-                "serie": "374",
+                "serie": "5",
                 "template": "O-Despacho",
                 "auto_confirm": true,
                 "access": 0
