@@ -164,7 +164,7 @@
                 "menu": "Indeferimento",
                 "title": "Ofício de Indeferimento",
                 "serie": "11",
-                "template": "O- Indeferimento",
+                "template": "O-Indeferimento",
                 "auto_confirm": true,
                 "access": "auto",
                 "reference": "$ref.tipo == OF",
@@ -177,6 +177,14 @@
                 "template": "O-Despacho",
                 "auto_confirm": true,
                 "access": 0
+            },
+            {
+                "menu": "-/Ofício Mutante",
+                "title": "Gerar Ofício genérico",
+                "serie": "11",
+                "template": "O-Mutante",
+                "auto_confirm": true,
+                "access": 2
             }
         ]
     }

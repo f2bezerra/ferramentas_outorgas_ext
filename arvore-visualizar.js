@@ -134,6 +134,7 @@ function addNovo() {
 			preData.upload = e.data.upload;
 			preData.autoconfirm = e.data.auto_confirm;
 			if (e.data.reference && solve(e.data.reference, null, variables)) preData.reference = reference;
+			preData.txtpad = e.data.template;
 		}
 
 		let url_tipo = absoluteUrl($('#divArvoreAcoes a[href*="acao=documento_escolher_tipo"]').attr("href"));
@@ -155,11 +156,18 @@ function addAlterarDoc() {
 
 	createPopupMenu(btn, [{ id: "na_restrito_pes", text: parseMarkdown("Alterar para Nível de Acesso **Restrito: Pessoal**"), icon: "menu-key-icon" },
 	{ id: "na_restrito_eco", text: parseMarkdown("Alterar para Nível de Acesso **Restrito: Econômica**"), icon: "menu-key-icon" },
+	{ id: "na_restrito_passivo", text: parseMarkdown("Alterar para Nível de Acesso **Restrito: Passivo**"), icon: "menu-key-icon" },
 		"-",
 	{ id: "na_publico", text: parseMarkdown("Alterar para Nível de Acesso **Público**"), icon: "menu-share-icon" }], { dropButton: "menu-drop-button", dropButtonTitle: "Alteração rápida de nível de acesso" }, async e => {
 
-		let acesso = e.id == "na_publico" ? 0 : e.id == "na_restrito_pes" ? 1 : 2;
-		let str_acesso = ["Público", "Restrito (Info. Pessoal)", "Restrito (Info. Econômica)"];
+		let acesso = 0;
+		switch (e.id) {
+			case "na_restrito_pes": acesso = 1; break;
+			case "na_restrito_eco": acesso = 2; break;
+			case "na_restrito_passivo": acesso = 3; break;
+		}
+
+		let str_acesso = ["Público", "Restrito (Info. Pessoal)", "Restrito (Info. Econômica)", "Restrito (Sujeito Passivo)"];
 
 		if (!await confirmMessage(`Confirmar alteração do nível de acesso para **${str_acesso[acesso].toUpperCase()}**?`)) return;
 
