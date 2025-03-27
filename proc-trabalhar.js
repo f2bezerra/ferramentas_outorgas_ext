@@ -82,7 +82,7 @@ document.getElementById("ifrConteudoVisualizacao").addEventListener("load", func
 	}
 
 	//Inserir descritivo do documento
-	if (predata.desc && ($txtDesc = $(docV).find("#txtNumero")) && $txtDesc.is(":visible")) {
+	if (predata.desc && ($txtDesc = $(docV).find("#txtNomeArvore")) && $txtDesc.is(":visible")) {
 		if (predata.desc === "from_clipboard") navigator.clipboard.readText().then(t => { $txtDesc.val(t) });
 		else $txtDesc.val(predata.desc);
 	}
